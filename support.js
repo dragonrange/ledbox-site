@@ -23,6 +23,8 @@ const TEXT = {
     errSend: "Couldn't send right now. Check your connection and try again.",
     done: "Thanks! Your message was sent. We'll answer by email.",
     doneMail: "Your email app opened with the message ready — just tap send there.",
+    errLate: "Hmm, the message may not have gone through.",
+    errLateLink: "Send it by email instead.",
   },
   pt: {
     navSupport: "Suporte", navPrivacy: "Privacidade", navDelete: "Apagar meus dados",
@@ -38,6 +40,8 @@ const TEXT = {
     errSend: "Não deu para enviar agora. Confira a internet e tente de novo.",
     done: "Valeu! Sua mensagem foi enviada. Respondemos por e-mail.",
     doneMail: "Seu app de e-mail abriu com a mensagem pronta — é só tocar em enviar lá.",
+    errLate: "Ops, pode ser que a mensagem não tenha chegado.",
+    errLateLink: "Mande por e-mail.",
   },
 };
 
@@ -95,28 +99,48 @@ form.addEventListener("submit", async (e) => {
 
   button.disabled = true;
   button.textContent = t.sending;
-  try {
-    const res = await fetch(CONFIG.ENDPOINT, {
-      method: "POST",
-      headers: { "Content-Type": "application/json", Accept: "application/json" },
-      body: JSON.stringify({
-        _subject: subject,
-        _replyto: data.email,
-        _template: "table",
-        _captcha: "false",
-        Topic: data.topic,
-        Email: data.email,
-        "Google Play Games name": data.gamerName || "-",
-        "Phone model": data.device || "-",
-        Message: data.message || "-",
-        Language: lang,
-      }),
-    });
+
+  // O FormSubmit entrega o e-mail na hora, mas demora para responder ao site. Então: se em ~2 s não houve erro,
+  // já mostra "enviada" e deixa a resposta chegar em segundo plano; se ela vier com erro, troca o aviso por
+  // um link para mandar pelo app de e-mail (a mensagem nunca se perde).
+  const request = fetch(CONFIG.ENDPOINT, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", Accept: "application/json" },
+    body: JSON.stringify({
+      _subject: subject,
+      _replyto: data.email,
+      _template: "table",
+      _captcha: "false",
+      Topic: data.topic,
+      Email: data.email,
+      "Google Play Games name": data.gamerName || "-",
+      "Phone model": data.device || "-",
+      Message: data.message || "-",
+      Language: lang,
+    }),
+  }).then(async (res) => {
     const json = await res.json().catch(() => ({}));
     if (!res.ok || String(json.success) === "false") throw new Error(json.message || res.status);
+    return "ok";
+  });
+  const slow = new Promise((resolve) => setTimeout(() => resolve("slow"), 2000));
+
+  try {
+    const first = await Promise.race([request, slow]);
     finish(t.done);
+    if (first === "slow") request.catch(lateFailure);
   } catch (err) {
     console.warn("Envio pelo FormSubmit falhou, abrindo o app de e-mail:", err);
     openMailApp();
+  }
+
+  function lateFailure(err) {
+    console.warn("Envio pelo FormSubmit falhou depois:", err);
+    doneBox.className = "notice err";
+    doneBox.textContent = t.errLate + " ";
+    const link = document.createElement("a");
+    link.href = `mailto:${CONFIG.CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(mailBody)}`;
+    link.textContent = t.errLateLink;
+    doneBox.appendChild(link);
   }
 });
