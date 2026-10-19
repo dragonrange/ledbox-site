@@ -1,17 +1,10 @@
 // Formulário de suporte do LedBox.
-// As respostas vão para um Google Forms (planilha + aviso por e-mail). Para ligar:
-//   1. Crie o formulário com os campos abaixo (mesmos nomes de opção do assunto) e pegue o "link pré-preenchido".
-//   2. Preencha FORM_ACTION (…/formResponse) e os entry.NNN de cada campo.
-// Enquanto FORM_ACTION estiver vazio, o envio abre o app de e-mail do jogador já preenchido (CONTACT_EMAIL).
+// Envia direto para o e-mail de suporte pelo FormSubmit (formsubmit.co, gratuito, sem conta): a mensagem chega
+// como e-mail normal na caixa do CONTACT_EMAIL, com "Responder" indo para o e-mail que o jogador digitou.
+// Primeira vez: o FormSubmit manda um e-mail "Activate form" para o CONTACT_EMAIL; é preciso clicar para ativar.
+// Se o envio falhar (sem internet, serviço fora), cai no plano B: abre o app de e-mail do jogador já preenchido.
 const CONFIG = {
-  FORM_ACTION: "", // ex.: "https://docs.google.com/forms/d/e/XXXXXXXX/formResponse"
-  FIELDS: {
-    topic: "",     // ex.: "entry.111111111"
-    email: "",
-    gamerName: "",
-    device: "",
-    message: "",
-  },
+  ENDPOINT: "https://formsubmit.co/ajax/ledboxsupport@gmail.com",
   CONTACT_EMAIL: "ledboxsupport@gmail.com",
 };
 
@@ -90,27 +83,40 @@ form.addEventListener("submit", async (e) => {
   if (data.topic === "Delete my account and data" && !data.gamerName && !data.message) return showError(t.errGamer);
   if (!data.message && data.topic !== "Delete my account and data") return showError(t.errMessage);
 
-  // Sem Google Forms configurado: abre o e-mail já preenchido
-  if (!CONFIG.FORM_ACTION) {
-    const body = `Topic: ${data.topic}\nGoogle Play Games name: ${data.gamerName || "-"}\nPhone: ${data.device || "-"}\nReply to: ${data.email}\n\n${data.message}`;
-    location.href = `mailto:${CONFIG.CONTACT_EMAIL}?subject=${encodeURIComponent("[LedBox] " + data.topic)}&body=${encodeURIComponent(body)}`;
-    return finish(t.doneMail);
-  }
+  const subject = `[LedBox] ${data.topic}`;
+  const mailBody = `Topic: ${data.topic}\nGoogle Play Games name: ${data.gamerName || "-"}\nPhone: ${data.device || "-"}\nReply to: ${data.email}\n\n${data.message}`;
+  const openMailApp = () => {
+    location.href = `mailto:${CONFIG.CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(mailBody)}`;
+    finish(t.doneMail);
+  };
 
-  const body = new URLSearchParams();
-  for (const key of Object.keys(CONFIG.FIELDS)) {
-    if (CONFIG.FIELDS[key]) body.append(CONFIG.FIELDS[key], data[key]);
-  }
+  // Armadilha para robôs: campo escondido que gente não preenche
+  if (form._honey && form._honey.value) return finish(t.done);
 
   button.disabled = true;
   button.textContent = t.sending;
   try {
-    // O Google Forms não devolve CORS: a resposta é opaca, mas o envio chega
-    await fetch(CONFIG.FORM_ACTION, { method: "POST", mode: "no-cors", body });
+    const res = await fetch(CONFIG.ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify({
+        _subject: subject,
+        _replyto: data.email,
+        _template: "table",
+        _captcha: "false",
+        Topic: data.topic,
+        Email: data.email,
+        "Google Play Games name": data.gamerName || "-",
+        "Phone model": data.device || "-",
+        Message: data.message || "-",
+        Language: lang,
+      }),
+    });
+    const json = await res.json().catch(() => ({}));
+    if (!res.ok || String(json.success) === "false") throw new Error(json.message || res.status);
     finish(t.done);
-  } catch {
-    showError(t.errSend);
-    button.disabled = false;
-    button.textContent = t.send;
+  } catch (err) {
+    console.warn("Envio pelo FormSubmit falhou, abrindo o app de e-mail:", err);
+    openMailApp();
   }
 });
