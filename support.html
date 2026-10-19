@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LedBox Support</title>
+  <meta name="description" content="Report a bug, ask a question or request data deletion for the LedBox game.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway+Dots&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="wrap">
+    <header class="top">
+      <a class="led brand" href="index.html">LEDBOX</a>
+      <nav>
+        <a href="support.html" aria-current="page" data-t="navSupport">Support</a>
+        <a href="privacy.html" data-t="navPrivacy">Privacy</a>
+        <a href="delete.html" data-t="navDelete">Delete my data</a>
+      </nav>
+    </header>
+
+    <div class="lang-switch"><a href="?lang=en" data-lang="en">English</a><a href="?lang=pt" data-lang="pt">Português</a></div>
+
+    <h1 data-t="title">Support</h1>
+    <p class="muted" data-t="intro">Found a bug, have a question or want your data deleted? Send us a message and we'll answer by email.</p>
+
+    <div class="panel">
+      <form id="support" novalidate>
+        <label>
+          <span data-t="topic">Topic</span>
+          <select name="topic" required>
+            <!-- Os valores (value) precisam ser IGUAIS às opções do Google Forms -->
+            <option value="Bug" data-t="topicBug">Bug</option>
+            <option value="Question" data-t="topicQuestion">Question</option>
+            <option value="Delete my account and data" data-t="topicDelete">Delete my account and data</option>
+            <option value="Other" data-t="topicOther">Other</option>
+          </select>
+        </label>
+
+        <label>
+          <span data-t="email">Your email</span>
+          <input type="email" name="email" autocomplete="email" required>
+        </label>
+
+        <label>
+          <span><span data-t="gamer">Google Play Games name</span> <span class="hint" data-t="gamerHint">(as shown on the leaderboard)</span></span>
+          <input type="text" name="gamerName" maxlength="60" autocomplete="nickname">
+        </label>
+
+        <label>
+          <span><span data-t="device">Phone model</span> <span class="hint" data-t="optional">(optional)</span></span>
+          <input type="text" name="device" maxlength="80">
+        </label>
+
+        <label>
+          <span data-t="message">Message</span>
+          <textarea name="message" maxlength="4000" required></textarea>
+        </label>
+
+        <div id="error" class="notice err hidden" role="alert"></div>
+        <button type="submit" data-t="send">Send</button>
+      </form>
+      <div id="done" class="notice ok hidden" role="status"></div>
+    </div>
+
+    <p class="muted"><span data-t="privacyNote">What you send is used only to answer you. See the</span> <a href="privacy.html" data-t="privacyLink">privacy policy</a>.</p>
+
+    <footer>LedBox · DesignFOS</footer>
+  </main>
+  <script src="support.js"></script>
+</body>
+</html>
