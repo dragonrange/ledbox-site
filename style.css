@@ -149,3 +149,126 @@ footer { margin-top: 56px; color: var(--muted); font-size: 13px; }
   header.top { flex-direction: column; align-items: flex-start; }
   .panel { padding: 16px; }
 }
+
+/* ---------- Página inicial (landing) ---------- */
+:root { --pink: #ff6bd6; --purple: #b46bff; }
+
+.wrap.wide { max-width: 1120px; }
+
+body.landing {
+  background:
+    radial-gradient(1200px 600px at 75% -10%, rgba(121, 254, 255, .10), transparent 60%),
+    radial-gradient(900px 500px at 0% 40%, rgba(255, 107, 122, .06), transparent 60%),
+    var(--bg);
+}
+
+body.landing header.top { padding-top: 22px; padding-bottom: 0; margin-bottom: 0; }
+
+.eyebrow {
+  margin: 0 0 8px;
+  font-size: 13px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+.eyebrow.red { color: var(--red); }
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+  gap: 48px;
+  align-items: center;
+  padding-top: 56px;
+  padding-bottom: 72px;
+}
+.hero .led.big { font-size: clamp(64px, 9vw, 120px); }
+.lead { font-size: 19px; line-height: 1.55; margin: 18px 0 6px; color: #fff; }
+.pt { margin: 0 0 22px; }
+.small { font-size: 13px; }
+.hl { color: var(--cyan); font-weight: 600; }
+.hl.purple { color: var(--purple); }
+
+/* Selo oficial do Google Play: imagem sem alteração (a margem transparente faz parte dela) */
+.play-badge { display: inline-block; line-height: 0; margin-left: -12px; }
+.play-badge img { height: 84px; width: auto; }
+.play-badge:hover img { filter: brightness(1.08); }
+
+/* Tela do jogo com moldura neon */
+.screen {
+  margin: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(121, 254, 255, .35);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .6), 0 18px 60px rgba(0, 0, 0, .55), 0 0 40px rgba(121, 254, 255, .14);
+  background: #000;
+}
+.screen img { display: block; width: 100%; height: auto; }
+.hero-shot { transform: perspective(1400px) rotateY(-6deg); }
+
+.section-title { font-size: 30px; margin: 0 0 24px; color: #fff; }
+section { scroll-margin-top: 24px; }
+#features, #screens { padding-top: 24px; padding-bottom: 64px; }
+
+.features { display: grid; gap: 16px; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.feature {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 22px 20px;
+}
+.feature h3 { margin: 14px 0 6px; font-size: 18px; }
+.feature p { margin: 0; color: var(--muted); font-size: 15px; }
+.dot { display: block; width: 14px; height: 14px; border-radius: 50%; }
+.dot.cyan { background: var(--cyan); box-shadow: 0 0 14px var(--cyan); }
+.dot.green { background: var(--green); box-shadow: 0 0 14px var(--green); }
+.dot.yellow { background: var(--yellow); box-shadow: 0 0 14px var(--yellow); }
+.dot.pink { background: var(--pink); box-shadow: 0 0 14px var(--pink); }
+
+.boss {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
+  gap: 48px;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 80px;
+}
+.led.red-led {
+  color: var(--red);
+  font-size: clamp(56px, 7vw, 92px);
+  text-shadow: 0 0 6px rgba(255, 107, 122, .85), 0 0 26px rgba(255, 107, 122, .45);
+}
+.boss-sub { margin: 4px 0 18px; letter-spacing: .3em; text-transform: uppercase; color: var(--red); font-size: 14px; }
+
+.gallery { display: grid; gap: 18px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+.cta { text-align: center; padding-top: 24px; padding-bottom: 72px; }
+.cta .led { font-size: clamp(48px, 8vw, 84px); margin-bottom: 12px; }
+.cta .play-badge { margin-left: 0; }
+
+.site-footer {
+  border-top: 1px solid var(--line);
+  padding-top: 28px;
+  padding-bottom: 40px;
+  color: var(--muted);
+  font-size: 14px;
+}
+.site-footer nav { display: flex; gap: 18px; flex-wrap: wrap; margin-bottom: 10px; }
+.site-footer nav a { color: var(--text); text-decoration: none; }
+.site-footer nav a:hover { color: var(--cyan); }
+.site-footer p { margin: 4px 0; }
+.site-footer .legal { font-size: 12px; }
+
+@media (max-width: 900px) {
+  .hero, .boss { grid-template-columns: 1fr; gap: 32px; padding-top: 32px; }
+  .hero-shot { transform: none; }
+  .features { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 560px) {
+  .features, .gallery { grid-template-columns: 1fr; }
+  .play-badge img { height: 72px; }
+  .lead { font-size: 17px; }
+}
+/* Na página inicial o título grande já é a marca: o cabeçalho mostra só os links */
+body.landing header.top .brand { display: none; }
+body.landing header.top { justify-content: flex-end; }
+@media (max-width: 520px) { body.landing header.top { align-items: flex-end; } }
