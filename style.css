@@ -1,38 +1,61 @@
-/* LedBox — páginas públicas (política de privacidade, suporte, exclusão de dados) */
+/* LedBox — site público. Visual do jogo: azul petróleo escuro com linhas de varredura, painéis com borda ciano
+   (como as cartas da loja), títulos em letreiro de LED (led.js) e texto na Raleway (a família da fonte do jogo). */
 :root {
-  --bg: #04060a;
-  --panel: #0b1017;
-  --line: #17212c;
-  --text: #d9e6ee;
-  --muted: #8a9aa8;
+  --bg: #06141c;
+  --bg-deep: #030a0f;
+  --panel: rgba(9, 32, 43, .78);
+  --panel-solid: #0a2330;
+  --line: rgba(121, 254, 255, .28);
+  --line-soft: rgba(121, 254, 255, .14);
+  --text: #d6eef2;
+  --muted: #86a6ae;
   --cyan: #79feff;
   --green: #6dff8b;
   --yellow: #ffe45c;
-  --red: #ff6b7a;
-  --radius: 14px;
+  --red: #ff5468;
+  --pink: #ff6bd6;
+  --purple: #b98bff;
+  --radius: 16px;
 }
 
 * { box-sizing: border-box; }
-
-html { -webkit-text-size-adjust: 100%; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
 
 body {
   margin: 0;
-  background: var(--bg);
   color: var(--text);
-  font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background:
+    radial-gradient(1100px 700px at 50% -10%, rgba(121, 254, 255, .10), transparent 65%),
+    radial-gradient(900px 600px at 50% 120%, rgba(121, 254, 255, .06), transparent 60%),
+    linear-gradient(180deg, var(--bg) 0%, var(--bg-deep) 100%) fixed;
+  font: 17px/1.65 "Raleway", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  min-height: 100vh;
+}
+
+/* Linhas de varredura do jogo, por cima de tudo, bem fracas */
+.scanlines {
+  position: fixed; inset: 0; pointer-events: none; z-index: 50;
+  background: repeating-linear-gradient(180deg, rgba(0, 0, 0, .16) 0 1px, transparent 1px 3px);
+  mix-blend-mode: multiply;
 }
 
 a { color: var(--cyan); }
 a:hover { color: #fff; }
+b { font-weight: 700; }
 
-.wrap {
-  max-width: 760px;
-  margin: 0 auto;
-  padding: 32px 16px 64px;
-}
+.c-cyan { color: var(--cyan); }
+.c-green { color: var(--green); }
+.c-yellow { color: var(--yellow); }
+.c-red { color: var(--red); }
+.c-pink { color: var(--pink); }
+.c-purple { color: var(--purple); }
 
-/* Título em "LED": fonte de pontos + brilho neon, como no jogo */
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+.wrap { max-width: 760px; margin: 0 auto; padding: 32px 16px 64px; }
+.wrap.wide { max-width: 1080px; }
+
+/* Título em fonte de pontos (páginas internas) */
 .led {
   font-family: "Raleway Dots", system-ui, sans-serif;
   font-weight: 400;
@@ -43,232 +66,178 @@ a:hover { color: #fff; }
   margin: 0;
 }
 .led.big { font-size: clamp(56px, 16vw, 112px); }
-.led.green { color: var(--green); text-shadow: 0 0 6px rgba(109, 255, 139, .8), 0 0 22px rgba(109, 255, 139, .4); }
-.led.yellow { color: var(--yellow); text-shadow: 0 0 6px rgba(255, 228, 92, .8), 0 0 22px rgba(255, 228, 92, .4); }
 
-header.top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 28px;
-}
+header.top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 28px; }
 header.top .brand { text-decoration: none; font-size: 34px; }
 header.top nav { display: flex; gap: 14px; flex-wrap: wrap; font-size: 14px; }
 header.top nav a { color: var(--muted); text-decoration: none; }
 header.top nav a:hover, header.top nav a[aria-current] { color: var(--cyan); }
 
-h1 { font-size: 28px; margin: 0 0 6px; }
-h2 { font-size: 20px; margin: 32px 0 8px; color: #fff; }
-h3 { font-size: 17px; margin: 22px 0 6px; color: #fff; }
+h1 { font-size: 28px; margin: 0 0 6px; color: #fff; }
+h2 { font-size: 21px; margin: 32px 0 8px; color: #fff; }
+h3 { font-size: 18px; margin: 22px 0 6px; color: #fff; }
 p, li { color: var(--text); }
 .muted { color: var(--muted); font-size: 14px; }
 
+/* Painel com borda ciano, como as cartas e a prévia da loja */
 .panel {
   background: var(--panel);
-  border: 1px solid var(--line);
+  border: 1.5px solid var(--line);
   border-radius: var(--radius);
   padding: 20px;
   margin: 18px 0;
+  box-shadow: inset 0 0 30px rgba(121, 254, 255, .05), 0 0 24px rgba(121, 254, 255, .06);
 }
 
-.lang-switch {
-  display: inline-flex;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  overflow: hidden;
-  margin: 8px 0 4px;
-}
-.lang-switch a {
-  padding: 6px 14px;
-  font-size: 14px;
-  text-decoration: none;
-  color: var(--muted);
-}
+.lang-switch { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; overflow: hidden; margin: 8px 0 4px; }
+.lang-switch a { padding: 6px 14px; font-size: 14px; text-decoration: none; color: var(--muted); }
 .lang-switch a:hover { color: var(--cyan); }
 
-hr.sep { border: 0; border-top: 1px solid var(--line); margin: 48px 0; }
+hr.sep { border: 0; border-top: 1px solid var(--line-soft); margin: 48px 0; }
 
-/* Cartões da página inicial */
 .cards { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-top: 28px; }
 .card {
-  display: block;
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 18px;
-  text-decoration: none;
-  color: var(--text);
-  transition: border-color .15s, box-shadow .15s;
+  display: block; background: var(--panel); border: 1.5px solid var(--line); border-radius: var(--radius);
+  padding: 18px; text-decoration: none; color: var(--text); transition: border-color .15s, box-shadow .15s;
 }
-.card:hover { border-color: var(--cyan); box-shadow: 0 0 18px rgba(121, 254, 255, .18); color: var(--text); }
+.card:hover { border-color: var(--cyan); box-shadow: 0 0 18px rgba(121, 254, 255, .2); color: var(--text); }
 .card strong { display: block; color: #fff; margin-bottom: 4px; }
 .card span { color: var(--muted); font-size: 14px; }
 
-/* Formulário */
+/* Formulário (suporte) */
 form { display: grid; gap: 16px; }
 label { display: grid; gap: 6px; font-size: 14px; color: #fff; }
 label .hint { color: var(--muted); font-weight: 400; }
 input, select, textarea {
-  width: 100%;
-  font: inherit;
-  color: var(--text);
-  background: #070b10;
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  padding: 11px 12px;
+  width: 100%; font: inherit; color: var(--text); background: #051118;
+  border: 1.5px solid var(--line-soft); border-radius: 10px; padding: 11px 12px;
 }
 textarea { min-height: 150px; resize: vertical; }
-input:focus, select:focus, textarea:focus {
-  outline: none;
-  border-color: var(--cyan);
-  box-shadow: 0 0 0 3px rgba(121, 254, 255, .15);
-}
+input:focus, select:focus, textarea:focus { outline: none; border-color: var(--cyan); box-shadow: 0 0 0 3px rgba(121, 254, 255, .15); }
 button {
-  font: inherit;
-  font-weight: 600;
-  color: #031014;
-  background: var(--cyan);
-  border: 0;
-  border-radius: 10px;
-  padding: 12px 18px;
-  cursor: pointer;
-  box-shadow: 0 0 18px rgba(121, 254, 255, .35);
+  font: inherit; font-weight: 700; color: #031014; background: var(--cyan); border: 0; border-radius: 10px;
+  padding: 12px 18px; cursor: pointer; box-shadow: 0 0 18px rgba(121, 254, 255, .35);
 }
 button:hover { background: #fff; }
 button:disabled { opacity: .6; cursor: default; }
 
 .notice { border-radius: 10px; padding: 12px 14px; font-size: 15px; }
 .notice.ok { background: rgba(109, 255, 139, .1); border: 1px solid rgba(109, 255, 139, .4); }
-.notice.err { background: rgba(255, 107, 122, .1); border: 1px solid rgba(255, 107, 122, .45); }
+.notice.err { background: rgba(255, 84, 104, .1); border: 1px solid rgba(255, 84, 104, .45); }
 .hidden { display: none; }
 
 footer { margin-top: 56px; color: var(--muted); font-size: 13px; }
 
-@media (max-width: 520px) {
-  header.top { flex-direction: column; align-items: flex-start; }
-  .panel { padding: 16px; }
+/* ---------- Página inicial ---------- */
+
+.topbar { position: sticky; top: 0; z-index: 20; background: rgba(4, 14, 20, .86); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-bottom: 1px solid var(--line-soft); }
+.topbar nav { display: flex; justify-content: flex-end; gap: 22px; padding-top: 16px; padding-bottom: 16px; font-size: 15px; font-weight: 600; }
+.topbar nav a { color: var(--muted); text-decoration: none; letter-spacing: .04em; }
+.topbar nav a:hover { color: var(--cyan); }
+
+canvas.led-sign { display: block; margin: 0 auto; }
+.heading { margin: 0 0 28px; }
+
+.hero { text-align: center; padding-top: 24px; padding-bottom: 24px; }
+.hero .title { margin-bottom: 6px; }
+.eyebrow { margin: 0 0 10px; font-size: 13px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--cyan); }
+.lead { max-width: 640px; margin: 0 auto 6px; font-size: 20px; line-height: 1.55; color: #fff; }
+.pt { max-width: 640px; margin: 0 auto 22px; font-size: 14px; color: var(--muted); }
+
+/* Selo oficial do Google Play: a imagem do Google sem alteração (a margem transparente faz parte dela) */
+.play-badge { display: inline-block; line-height: 0; }
+.play-badge img { height: 78px; width: auto; }
+.play-badge:hover img { filter: drop-shadow(0 0 14px rgba(121, 254, 255, .35)); }
+
+.chips { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; padding: 0; margin: 14px 0 0; }
+.chips li {
+  font-size: 13px; font-weight: 600; color: var(--muted); border: 1px solid var(--line-soft);
+  border-radius: 999px; padding: 5px 14px; background: rgba(9, 32, 43, .5);
 }
 
-/* ---------- Página inicial (landing) ---------- */
-:root { --pink: #ff6bd6; --purple: #b46bff; }
-
-.wrap.wide { max-width: 1120px; }
-
-body.landing {
-  background:
-    radial-gradient(1200px 600px at 75% -10%, rgba(121, 254, 255, .10), transparent 60%),
-    radial-gradient(900px 500px at 0% 40%, rgba(255, 107, 122, .06), transparent 60%),
-    var(--bg);
+/* Carrossel: moldura da loja, setas nas laterais, bolinhas de LED */
+#screens { padding-top: 8px; padding-bottom: 56px; }
+.carousel { position: relative; outline: none; padding: 0 56px; }
+.carousel .frame {
+  overflow: hidden; border-radius: 20px; border: 2px solid var(--line);
+  background: var(--panel-solid);
+  box-shadow: 0 0 0 6px rgba(121, 254, 255, .04), 0 0 40px rgba(121, 254, 255, .12), 0 24px 60px rgba(0, 0, 0, .5);
 }
-
-body.landing header.top { padding-top: 22px; padding-bottom: 0; margin-bottom: 0; }
-
-.eyebrow {
-  margin: 0 0 8px;
-  font-size: 13px;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  color: var(--cyan);
+.track { display: flex; transition: transform .45s cubic-bezier(.2, .8, .2, 1); touch-action: pan-y; }
+.slide { flex: 0 0 100%; margin: 0; position: relative; }
+.slide img { display: block; width: 100%; height: auto; user-select: none; -webkit-user-drag: none; }
+.slide figcaption {
+  position: absolute; left: 0; right: 0; bottom: 0; padding: 28px 20px 14px; text-align: center;
+  font-weight: 700; letter-spacing: .05em; color: #fff;
+  background: linear-gradient(0deg, rgba(3, 10, 15, .85), transparent);
 }
-.eyebrow.red { color: var(--red); }
-
-.hero {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
-  gap: 48px;
-  align-items: center;
-  padding-top: 56px;
-  padding-bottom: 72px;
+.arrow {
+  position: absolute; top: 50%; transform: translateY(-62%);
+  width: 44px; height: 44px; padding: 0; border-radius: 50%;
+  font: 700 30px/40px "Raleway", sans-serif; color: var(--cyan);
+  background: var(--panel-solid); border: 1.5px solid var(--line);
+  box-shadow: 0 0 16px rgba(121, 254, 255, .18);
 }
-.hero .led.big { font-size: clamp(64px, 9vw, 120px); }
-.lead { font-size: 19px; line-height: 1.55; margin: 18px 0 6px; color: #fff; }
-.pt { margin: 0 0 22px; }
-.small { font-size: 13px; }
-.hl { color: var(--cyan); font-weight: 600; }
-.hl.purple { color: var(--purple); }
-
-/* Selo oficial do Google Play: imagem sem alteração (a margem transparente faz parte dela) */
-.play-badge { display: inline-block; line-height: 0; margin-left: -12px; }
-.play-badge img { height: 84px; width: auto; }
-.play-badge:hover img { filter: brightness(1.08); }
-
-/* Tela do jogo com moldura neon */
-.screen {
-  margin: 0;
-  border-radius: 16px;
-  overflow: hidden;
-  border: 1px solid rgba(121, 254, 255, .35);
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, .6), 0 18px 60px rgba(0, 0, 0, .55), 0 0 40px rgba(121, 254, 255, .14);
-  background: #000;
+.arrow:hover { background: #0e3142; color: #fff; border-color: var(--cyan); }
+.arrow.prev { left: 0; }
+.arrow.next { right: 0; }
+.leds { display: flex; justify-content: center; gap: 12px; margin-top: 18px; }
+.leds .led {
+  width: 13px; height: 13px; padding: 0; border-radius: 50%; border: 0;
+  background: rgba(121, 254, 255, .16); box-shadow: none; cursor: pointer;
 }
-.screen img { display: block; width: 100%; height: auto; }
-.hero-shot { transform: perspective(1400px) rotateY(-6deg); }
+.leds .led.on { background: #e9ffff; box-shadow: 0 0 6px var(--cyan), 0 0 16px var(--cyan); }
 
-.section-title { font-size: 30px; margin: 0 0 24px; color: #fff; }
-section { scroll-margin-top: 24px; }
-#features, #screens { padding-top: 24px; padding-bottom: 64px; }
-
+/* Como jogar */
+#game { padding-top: 24px; padding-bottom: 48px; }
 .features { display: grid; gap: 16px; grid-template-columns: repeat(4, minmax(0, 1fr)); }
-.feature {
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 22px 20px;
-}
-.feature h3 { margin: 14px 0 6px; font-size: 18px; }
+.feature { margin: 0; }
+.feature h3 { margin: 14px 0 6px; }
 .feature p { margin: 0; color: var(--muted); font-size: 15px; }
-.dot { display: block; width: 14px; height: 14px; border-radius: 50%; }
-.dot.cyan { background: var(--cyan); box-shadow: 0 0 14px var(--cyan); }
-.dot.green { background: var(--green); box-shadow: 0 0 14px var(--green); }
-.dot.yellow { background: var(--yellow); box-shadow: 0 0 14px var(--yellow); }
-.dot.pink { background: var(--pink); box-shadow: 0 0 14px var(--pink); }
+.dot { display: block; width: 14px; height: 14px; border-radius: 50%; background: currentColor; box-shadow: 0 0 6px currentColor, 0 0 16px currentColor; }
 
-.boss {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
-  gap: 48px;
-  align-items: center;
-  padding-top: 40px;
-  padding-bottom: 80px;
-}
-.led.red-led {
-  color: var(--red);
-  font-size: clamp(56px, 7vw, 92px);
-  text-shadow: 0 0 6px rgba(255, 107, 122, .85), 0 0 26px rgba(255, 107, 122, .45);
-}
-.boss-sub { margin: 4px 0 18px; letter-spacing: .3em; text-transform: uppercase; color: var(--red); font-size: 14px; }
+/* Chefe */
+#boss { padding-top: 24px; padding-bottom: 48px; }
+.boss { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 32px; align-items: center; padding: 28px; border-color: rgba(255, 84, 104, .4); box-shadow: inset 0 0 40px rgba(255, 84, 104, .06), 0 0 30px rgba(255, 84, 104, .08); }
+.boss-text { text-align: left; min-width: 0; }
+.boss > * { min-width: 0; }
+html, body { overflow-x: clip; }
+.boss-text canvas.led-sign { margin: 0; }
+.boss-sub { margin: 4px 0 14px; letter-spacing: .32em; text-transform: uppercase; color: var(--red); font-size: 13px; font-weight: 700; }
+.boss .shot { border-radius: 14px; overflow: hidden; border: 1.5px solid rgba(255, 84, 104, .35); }
+.boss .shot img { display: block; width: 100%; height: auto; }
 
-.gallery { display: grid; gap: 18px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.cta { text-align: center; padding-top: 16px; padding-bottom: 64px; }
+.cta .heading { margin-bottom: 14px; }
 
-.cta { text-align: center; padding-top: 24px; padding-bottom: 72px; }
-.cta .led { font-size: clamp(48px, 8vw, 84px); margin-bottom: 12px; }
-.cta .play-badge { margin-left: 0; }
-
-.site-footer {
-  border-top: 1px solid var(--line);
-  padding-top: 28px;
-  padding-bottom: 40px;
-  color: var(--muted);
-  font-size: 14px;
-}
-.site-footer nav { display: flex; gap: 18px; flex-wrap: wrap; margin-bottom: 10px; }
-.site-footer nav a { color: var(--text); text-decoration: none; }
+.site-footer { border-top: 1px solid var(--line-soft); padding-top: 26px; padding-bottom: 40px; color: var(--muted); font-size: 14px; text-align: center; }
+.site-footer nav { display: flex; justify-content: center; gap: 22px; flex-wrap: wrap; margin-bottom: 10px; }
+.site-footer nav a { color: var(--text); text-decoration: none; font-weight: 600; }
 .site-footer nav a:hover { color: var(--cyan); }
 .site-footer p { margin: 4px 0; }
 .site-footer .legal { font-size: 12px; }
 
 @media (max-width: 900px) {
-  .hero, .boss { grid-template-columns: 1fr; gap: 32px; padding-top: 32px; }
-  .hero-shot { transform: none; }
   .features { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .boss { grid-template-columns: 1fr; }
 }
-@media (max-width: 560px) {
-  .features, .gallery { grid-template-columns: 1fr; }
-  .play-badge img { height: 72px; }
+@media (max-width: 600px) {
+  .topbar nav { justify-content: center; gap: 16px; font-size: 14px; }
+  .features { grid-template-columns: 1fr; }
+  .carousel { padding: 0; }
+  .arrow { width: 36px; height: 36px; font-size: 24px; line-height: 32px; top: auto; bottom: -6px; transform: none; }
+  .arrow.prev { left: 4px; }
+  .arrow.next { right: 4px; }
+  .slide figcaption { font-size: 13px; padding: 18px 10px 8px; }
   .lead { font-size: 17px; }
+  .play-badge img { height: 66px; }
+  .boss { padding: 18px; }
 }
-/* Na página inicial o título grande já é a marca: o cabeçalho mostra só os links */
-body.landing header.top .brand { display: none; }
-body.landing header.top { justify-content: flex-end; }
-@media (max-width: 520px) { body.landing header.top { align-items: flex-end; } }
+@media (max-width: 520px) {
+  header.top { flex-direction: column; align-items: flex-start; }
+  .panel { padding: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .track { transition: none; }
+  html { scroll-behavior: auto; }
+}

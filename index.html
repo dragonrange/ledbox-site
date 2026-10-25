@@ -5,23 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>LedBox — Neon arcade survival for Android</title>
   <meta name="description" content="You are the last antivirus of an infected network. Dodge corrupted packets, dash through danger and defeat OHMEGA, the root virus. Free on Google Play.">
-  <meta name="theme-color" content="#04060a">
+  <meta name="theme-color" content="#06141c">
   <meta property="og:type" content="website">
   <meta property="og:title" content="LedBox — Neon arcade survival">
   <meta property="og:description" content="Dodge, dash and survive as long as you can. Free on Google Play.">
   <meta property="og:image" content="https://dragonrange.github.io/ledbox-site/img/gameplay.jpg">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2304060a'/%3E%3Crect x='9' y='9' width='14' height='14' rx='2' fill='%2379feff'/%3E%3C/svg%3E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2306141c'/%3E%3Crect x='9' y='9' width='14' height='14' rx='2' fill='%2379feff'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Raleway+Dots&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&family=Raleway+Dots&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=3">
 </head>
 <body class="landing">
-  <header class="top wrap wide">
-    <a class="led brand" href="index.html">LEDBOX</a>
-    <nav>
-      <a href="#features">Game</a>
+  <div class="scanlines" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <nav class="wrap wide">
+      <a href="#game">Game</a>
       <a href="#boss">Boss</a>
       <a href="#screens">Screenshots</a>
       <a href="support.html">Support</a>
@@ -29,46 +30,62 @@
   </header>
 
   <main>
-    <!-- Abertura: título em LED, frase, selo do Google Play e a tela do jogo -->
+    <!-- Abertura: o título do Menu do jogo (LED BOX com a caixa no O), frase e o selo do Google Play -->
     <section class="hero wrap wide">
-      <div class="hero-text">
-        <p class="eyebrow">Neon arcade survival · Android</p>
-        <h1 class="led big">LEDBOX</h1>
-        <p class="lead">The network is infected. You are its last <span class="hl">antivirus</span>.<br>
-          Dodge corrupted packets, dash through danger and survive as long as you can.</p>
-        <p class="muted pt">A rede foi infectada. Você é o último antivírus. Desvie, dê dash e sobreviva o máximo que puder.</p>
-        <a class="play-badge" href="https://play.google.com/store/apps/details?id=com.DesignFOS.LedBox">
-          <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
-               alt="Get it on Google Play" width="646" height="250">
-        </a>
-        <p class="muted small">Free to play · Online leaderboard · Play with a friend</p>
+      <h1 class="visually-hidden">LedBox</h1>
+      <canvas class="led-sign title" data-text="LED BOX" data-box="O" data-color="#79feff" data-dot="17"></canvas>
+      <p class="eyebrow">Neon arcade survival for Android</p>
+      <p class="lead">The network is infected. You are its last <b class="c-cyan">antivirus</b>.
+        Dodge corrupted packets, dash through danger and survive as long as you can.</p>
+      <p class="pt">A rede foi infectada. Você é o último antivírus: desvie, dê dash e sobreviva o máximo que puder.</p>
+      <a class="play-badge" href="https://play.google.com/store/apps/details?id=com.DesignFOS.LedBox">
+        <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
+             alt="Get it on Google Play" width="646" height="250">
+      </a>
+      <ul class="chips">
+        <li>Free to play</li><li>Online leaderboard</li><li>Play with a friend</li>
+      </ul>
+    </section>
+
+    <!-- Carrossel: moldura da loja, setas nas laterais e bolinhas de LED (só a atual acesa) -->
+    <section id="screens" class="wrap wide">
+      <div class="carousel" aria-roledescription="carousel" aria-label="Screenshots">
+        <button class="arrow prev" type="button" aria-label="Previous screenshot">&#8249;</button>
+        <div class="frame">
+          <div class="track">
+            <figure class="slide"><img src="img/gameplay.jpg" alt="A neon box dodging glowing meteors" width="1596" height="896"><figcaption>Dodge the corrupted packets</figcaption></figure>
+            <figure class="slide"><img src="img/boss-intro.jpg" alt="OHMEGA, the root virus, entrance" width="1596" height="896" loading="lazy"><figcaption>OHMEGA, the root virus</figcaption></figure>
+            <figure class="slide"><img src="img/boss-fight.jpg" alt="Fighting OHMEGA" width="1596" height="896" loading="lazy"><figcaption>Send its purple patches back</figcaption></figure>
+            <figure class="slide"><img src="img/shop.jpg" alt="Shop with skins, colors and trails" width="1596" height="896" loading="lazy"><figcaption>Unlock skins, colors and trails</figcaption></figure>
+            <figure class="slide"><img src="img/menu.jpg" alt="LedBox main menu in LED letters" width="1596" height="896" loading="lazy"><figcaption>Seasonal events and an online leaderboard</figcaption></figure>
+          </div>
+        </div>
+        <button class="arrow next" type="button" aria-label="Next screenshot">&#8250;</button>
+        <div class="leds" role="tablist" aria-label="Choose a screenshot"></div>
       </div>
-      <figure class="hero-shot screen">
-        <img src="img/gameplay.jpg" alt="LedBox gameplay: a neon box dodging glowing meteors" width="1596" height="896">
-      </figure>
     </section>
 
     <!-- O que é o jogo -->
-    <section id="features" class="wrap wide">
-      <h2 class="section-title">How long can you last?</h2>
+    <section id="game" class="wrap wide">
+      <div class="heading"><canvas class="led-sign" data-text="HOW TO PLAY" data-color="#79feff" data-dot="7"></canvas></div>
       <div class="features">
-        <article class="feature">
-          <span class="dot cyan"></span>
+        <article class="panel feature">
+          <span class="dot c-cyan"></span>
           <h3>Dodge</h3>
           <p>Red warnings show where corrupted packets will pass. Read them, move, survive. Your score is the time you stay alive.</p>
         </article>
-        <article class="feature">
-          <span class="dot green"></span>
+        <article class="panel feature">
+          <span class="dot c-green"></span>
           <h3>Dash</h3>
           <p>Move with your left thumb, tap the right side to dash. For a split second, nothing can hurt you.</p>
         </article>
-        <article class="feature">
-          <span class="dot yellow"></span>
-          <h3>Collect & customize</h3>
+        <article class="panel feature">
+          <span class="dot c-yellow"></span>
+          <h3>Collect</h3>
           <p>Grab bits during the run and unlock skins, colors and trails. Seasonal events bring limited items.</p>
         </article>
-        <article class="feature">
-          <span class="dot pink"></span>
+        <article class="panel feature">
+          <span class="dot c-pink"></span>
           <h3>Compete</h3>
           <p>Climb the online leaderboard or create a room and challenge a friend with the same meteors.</p>
         </article>
@@ -76,32 +93,22 @@
     </section>
 
     <!-- O chefe -->
-    <section id="boss" class="boss wrap wide">
-      <div class="boss-text">
-        <p class="eyebrow red">Boss</p>
-        <h2 class="led red-led">OHMEGA</h2>
-        <p class="boss-sub">The root virus</p>
-        <p>Survive 90 seconds and the core of the infection shows up. Its cannons fill the screen with bullets, but it has one weakness: dash into the <span class="hl purple">purple patches</span> and send them back at it.</p>
-      </div>
-      <figure class="screen">
-        <img src="img/boss-fight.jpg" alt="Fighting OHMEGA, the root virus" width="1596" height="896" loading="lazy">
-      </figure>
-    </section>
-
-    <!-- Galeria -->
-    <section id="screens" class="wrap wide">
-      <h2 class="section-title">Screenshots</h2>
-      <div class="gallery">
-        <figure class="screen"><img src="img/menu.jpg" alt="LedBox main menu in LED letters" width="1596" height="896" loading="lazy"></figure>
-        <figure class="screen"><img src="img/boss-intro.jpg" alt="OHMEGA, the root virus, entrance" width="1596" height="896" loading="lazy"></figure>
-        <figure class="screen"><img src="img/shop.jpg" alt="Shop with skins, colors and trails" width="1596" height="896" loading="lazy"></figure>
-        <figure class="screen"><img src="img/gameplay.jpg" alt="Neon meteors filling the screen" width="1596" height="896" loading="lazy"></figure>
+    <section id="boss" class="wrap wide">
+      <div class="panel boss">
+        <div class="boss-text">
+          <p class="eyebrow c-red">Boss</p>
+          <canvas class="led-sign" data-text="OHMEGA" data-color="#ff5468" data-dot="11"></canvas>
+          <p class="boss-sub">The root virus</p>
+          <p>Survive 90 seconds and the core of the infection shows up. Its cannons fill the screen with bullets, but it has
+            one weakness: dash into the <b class="c-purple">purple patches</b> and send them back at it.</p>
+        </div>
+        <div class="shot"><img src="img/boss-fight.jpg" alt="Fighting OHMEGA, the root virus" width="1596" height="896" loading="lazy"></div>
       </div>
     </section>
 
     <!-- Chamada final -->
     <section class="cta wrap wide">
-      <h2 class="led">READY?</h2>
+      <div class="heading"><canvas class="led-sign" data-text="READY?" data-color="#6dff8b" data-dot="12"></canvas></div>
       <a class="play-badge" href="https://play.google.com/store/apps/details?id=com.DesignFOS.LedBox">
         <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
              alt="Get it on Google Play" width="646" height="250" loading="lazy">
@@ -118,5 +125,8 @@
     <p>LedBox · © 2026 DesignFOS</p>
     <p class="legal">Google Play and the Google Play logo are trademarks of Google LLC.</p>
   </footer>
+
+  <script src="led.js?v=3"></script>
+  <script src="carousel.js?v=3"></script>
 </body>
 </html>
