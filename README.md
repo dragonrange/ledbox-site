@@ -15,4 +15,4 @@ E-mail de contato: ledboxsupport@gmail.com (em `privacy.html`, `delete.html` e `
 - Selo **oficial** do Google Play (imagem do gerador do Google, sem alterações, em inglês como a página), com link para
   a página da loja e a frase de marca registrada no rodapé — regras de marca do Google.
 - Imagens em `img/` (capturas do jogo em JPG, 1596x896).
-- Só publicar (push) quando o jogo estiver público na loja: em teste fechado a página da loja dá "Not Found".
+- Enquanto o jogo está em teste fechado, a página da loja dá "Not Found" para o público (publicado assim mesmo, decisão do Felipe em 25/10).
