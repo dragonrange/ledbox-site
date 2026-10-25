@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&family=Raleway+Dots&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=3">
+  <link rel="stylesheet" href="style.css?v=5">
 </head>
 <body class="landing">
   <div class="scanlines" aria-hidden="true"></div>
@@ -33,7 +33,7 @@
     <!-- Abertura: o título do Menu do jogo (LED BOX com a caixa no O), frase e o selo do Google Play -->
     <section class="hero wrap wide">
       <h1 class="visually-hidden">LedBox</h1>
-      <canvas class="led-sign title" data-text="LED BOX" data-box="O" data-color="#79feff" data-dot="17"></canvas>
+      <div class="led-sign title" data-text="LED BOX" data-box="O" data-color="#79feff" data-dot="17"></div>
       <p class="eyebrow">Neon arcade survival for Android</p>
       <p class="lead">The network is infected. You are its last <b class="c-cyan">antivirus</b>.
         Dodge corrupted packets, dash through danger and survive as long as you can.</p>
@@ -67,7 +67,7 @@
 
     <!-- O que é o jogo -->
     <section id="game" class="wrap wide">
-      <div class="heading"><canvas class="led-sign" data-text="HOW TO PLAY" data-color="#79feff" data-dot="7"></canvas></div>
+      <div class="heading"><div class="led-sign" data-text="HOW TO PLAY" data-color="#79feff" data-dot="7"></div></div>
       <div class="features">
         <article class="panel feature">
           <span class="dot c-cyan"></span>
@@ -97,7 +97,7 @@
       <div class="panel boss">
         <div class="boss-text">
           <p class="eyebrow c-red">Boss</p>
-          <canvas class="led-sign" data-text="OHMEGA" data-color="#ff5468" data-dot="11"></canvas>
+          <div class="led-sign" data-text="OHMEGA" data-color="#ff5468" data-dot="11"></div>
           <p class="boss-sub">The root virus</p>
           <p>Survive 90 seconds and the core of the infection shows up. Its cannons fill the screen with bullets, but it has
             one weakness: dash into the <b class="c-purple">purple patches</b> and send them back at it.</p>
@@ -108,7 +108,7 @@
 
     <!-- Chamada final -->
     <section class="cta wrap wide">
-      <div class="heading"><canvas class="led-sign" data-text="READY?" data-color="#6dff8b" data-dot="12"></canvas></div>
+      <div class="heading"><div class="led-sign" data-text="READY?" data-color="#6dff8b" data-dot="12"></div></div>
       <a class="play-badge" href="https://play.google.com/store/apps/details?id=com.DesignFOS.LedBox">
         <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
              alt="Get it on Google Play" width="646" height="250" loading="lazy">
@@ -126,7 +126,7 @@
     <p class="legal">Google Play and the Google Play logo are trademarks of Google LLC.</p>
   </footer>
 
-  <script src="led.js?v=3"></script>
+  <script src="led.js?v=5"></script>
   <script src="carousel.js?v=3"></script>
 </body>
 </html>

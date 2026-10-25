@@ -135,7 +135,14 @@ footer { margin-top: 56px; color: var(--muted); font-size: 13px; }
 .topbar nav a { color: var(--muted); text-decoration: none; letter-spacing: .04em; }
 .topbar nav a:hover { color: var(--cyan); }
 
-canvas.led-sign { display: block; margin: 0 auto; }
+.led-sign svg { display: block; width: 100%; height: auto; margin: 0 auto; overflow: visible; }
+.led-sign .off circle { fill: var(--led); opacity: .13; }
+.led-sign .px { opacity: 0; transition: opacity .35s ease; }
+.led-sign.lit .px { opacity: 1; }
+.led-sign .glow { fill: var(--led); }
+.led-sign .core { fill: #fff; opacity: .8; }
+.led-sign .boxfill { fill: #d8ffff; }
+.led-sign .boxglow { fill: none; stroke: var(--led); stroke-linejoin: round; }
 .heading { margin: 0 0 28px; }
 
 .hero { text-align: center; padding-top: 24px; padding-bottom: 24px; }
@@ -202,7 +209,7 @@ canvas.led-sign { display: block; margin: 0 auto; }
 .boss-text { text-align: left; min-width: 0; }
 .boss > * { min-width: 0; }
 html, body { overflow-x: clip; }
-.boss-text canvas.led-sign { margin: 0; }
+.boss-text .led-sign svg { margin: 0; }
 .boss-sub { margin: 4px 0 14px; letter-spacing: .32em; text-transform: uppercase; color: var(--red); font-size: 13px; font-weight: 700; }
 .boss .shot { border-radius: 14px; overflow: hidden; border: 1.5px solid rgba(255, 84, 104, .35); }
 .boss .shot img { display: block; width: 100%; height: auto; }
