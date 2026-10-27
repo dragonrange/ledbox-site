@@ -14,7 +14,9 @@ E-mail de contato: ledboxsupport@gmail.com (em `privacy.html`, `delete.html` e `
 
 - Selo **oficial** do Google Play (imagem do gerador do Google, sem alterações, em inglês como a página), com link para
   a página da loja e a frase de marca registrada no rodapé — regras de marca do Google.
-- Imagens em `img/` (capturas do jogo em JPG, 1596x896), num carrossel (`carousel.js`) com moldura da loja, setas e bolinhas de LED.
-- Títulos em letreiro de LED (`led.js`): as mesmas letras 5x7 do `LedSign` do jogo, desenhadas em canvas e acendendo em onda.
+- Imagens em `img/` (capturas do jogo em JPG, 1596x896), num carrossel (`carousel.js`) com moldura da loja, setas e bolinhas de LED; clicar abre um popup grande na própria página (mesmas setas e bolinhas, arrastar, Esc fecha).
+- Trailer em `video/ledbox-trailer.mp4` (gravado no jogo: LedBox > Trailer > Gravar trailer), capa `img/trailer-poster.jpg`; `preload="none"`, só baixa quando dá play.
+- Seção **Bosses**: o OHMEGA é o Boss 01 e os próximos aparecem trancados ("???", coming soon) — o jogo vai ter mais chefes.
+- Títulos em letreiro de LED (`led.js`): as mesmas letras 5x7 do `LedSign` do jogo, desenhadas em SVG (sem filtro de desfoque, que quebrava no Brave) e acendendo em onda.
 - Ao mudar `style.css`/`*.js`, subir o `?v=` nos links (o GitHub Pages guarda arquivos em cache por ~10 min).
 - Enquanto o jogo está em teste fechado, a página da loja dá "Not Found" para o público (publicado assim mesmo, decisão do Felipe em 25/10).

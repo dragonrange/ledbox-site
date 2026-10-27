@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>LedBox — Neon arcade survival for Android</title>
-  <meta name="description" content="You are the last antivirus of an infected network. Dodge corrupted packets, dash through danger and defeat OHMEGA, the root virus. Free on Google Play.">
+  <meta name="description" content="You are the last antivirus of an infected network. Dodge corrupted packets, dash through danger and take down giant viruses like OHMEGA, the root virus. Free on Google Play.">
   <meta name="theme-color" content="#06141c">
   <meta property="og:type" content="website">
   <meta property="og:title" content="LedBox — Neon arcade survival">
@@ -15,15 +15,16 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&family=Raleway+Dots&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=5">
+  <link rel="stylesheet" href="style.css?v=6">
 </head>
 <body class="landing">
   <div class="scanlines" aria-hidden="true"></div>
 
   <header class="topbar">
     <nav class="wrap wide">
+      <a href="#trailer">Trailer</a>
       <a href="#game">Game</a>
-      <a href="#boss">Boss</a>
+      <a href="#bosses">Bosses</a>
       <a href="#screens">Screenshots</a>
       <a href="support.html">Support</a>
     </nav>
@@ -47,8 +48,19 @@
       </ul>
     </section>
 
-    <!-- Carrossel: moldura da loja, setas nas laterais e bolinhas de LED (só a atual acesa) -->
+    <!-- Trailer: gravado no próprio jogo (LedBox > Trailer > Gravar trailer); só baixa quando der play -->
+    <section id="trailer" class="wrap wide">
+      <div class="video-frame">
+        <video controls playsinline preload="none" poster="img/trailer-poster.jpg" width="1920" height="1080">
+          <source src="video/ledbox-trailer.mp4" type="video/mp4">
+          Your browser can't play this video. <a href="video/ledbox-trailer.mp4">Download the trailer</a>.
+        </video>
+      </div>
+    </section>
+
+    <!-- Carrossel: moldura da loja, setas nas laterais e bolinhas de LED (só a atual acesa); clicar abre em tela cheia -->
     <section id="screens" class="wrap wide">
+      <div class="heading"><div class="led-sign" data-text="SCREENSHOTS" data-color="#79feff" data-dot="7"></div></div>
       <div class="carousel" aria-roledescription="carousel" aria-label="Screenshots">
         <button class="arrow prev" type="button" aria-label="Previous screenshot">&#8249;</button>
         <div class="frame">
@@ -92,17 +104,32 @@
       </div>
     </section>
 
-    <!-- O chefe -->
-    <section id="boss" class="wrap wide">
+    <!-- Chefes: o OHMEGA é o primeiro; os próximos aparecem trancados ("coming soon") -->
+    <section id="bosses" class="wrap wide">
+      <div class="heading"><div class="led-sign" data-text="BOSSES" data-color="#ff5468" data-dot="9"></div></div>
+      <p class="section-lead">The infection keeps mutating. Survive long enough and a boss shows up, each one with its own
+        attacks and its own weakness.</p>
       <div class="panel boss">
         <div class="boss-text">
-          <p class="eyebrow c-red">Boss</p>
+          <p class="eyebrow c-red">Boss 01</p>
           <div class="led-sign" data-text="OHMEGA" data-color="#ff5468" data-dot="11"></div>
           <p class="boss-sub">The root virus</p>
-          <p>Survive 90 seconds and the core of the infection shows up. Its cannons fill the screen with bullets, but it has
-            one weakness: dash into the <b class="c-purple">purple patches</b> and send them back at it.</p>
+          <p>Shows up after 90 seconds. Its cannons fill the screen with bullets, but it has one weakness: dash into the
+            <b class="c-purple">purple patches</b> and send them back at it.</p>
         </div>
         <div class="shot"><img src="img/boss-fight.jpg" alt="Fighting OHMEGA, the root virus" width="1596" height="896" loading="lazy"></div>
+      </div>
+      <div class="locked-bosses">
+        <article class="panel locked">
+          <p class="eyebrow">Boss 02</p>
+          <div class="led-sign" data-text="???" data-color="#5d7a83" data-dot="8"></div>
+          <p>A new mutation is spreading through the network. Coming in a future update.</p>
+        </article>
+        <article class="panel locked">
+          <p class="eyebrow">Boss 03</p>
+          <div class="led-sign" data-text="???" data-color="#5d7a83" data-dot="8"></div>
+          <p>Something bigger is still hiding in the network. Coming in a future update.</p>
+        </article>
       </div>
     </section>
 
@@ -127,6 +154,6 @@
   </footer>
 
   <script src="led.js?v=5"></script>
-  <script src="carousel.js?v=3"></script>
+  <script src="carousel.js?v=5"></script>
 </body>
 </html>
