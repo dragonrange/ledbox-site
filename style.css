@@ -308,21 +308,32 @@ body.no-scroll { overflow: hidden; }
   .lb-frame figcaption { font-size: 13px; padding: 18px 10px 8px; }
 }
 
-/* ---------- Teste fechado: entrar pela web e instalar pelo Play ---------- */
+/* ---------- Teste fechado: passo 1 (inscrever pela web) e passo 2 (instalar pelo Play) ---------- */
 .join-test {
   margin: 18px auto 0; max-width: 560px; padding: 16px 18px; border-radius: 16px;
   border: 1px solid var(--line-soft); background: rgba(9, 32, 43, .5);
 }
-.join-test p { margin: 0 0 8px; }
-.join-title { font-weight: 700; color: #6dff8b; }
-.join-steps { font-size: 14px; color: var(--muted); }
+.join-title { margin: 0 0 12px; font-weight: 700; color: #6dff8b; }
 .join-test .pt { display: inline; margin: 0; font-size: inherit; font-weight: 400; color: var(--muted); }
-.join-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 12px; }
-.join-links .btn {
-  display: inline-block; padding: 10px 18px; border-radius: 999px; font-weight: 700; text-decoration: none;
-  background: #79feff; color: #04161d; border: 2px solid #79feff;
+.join-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.join-steps li {
+  display: grid; grid-template-columns: 34px 1fr 230px; align-items: center; gap: 12px; text-align: left;
+  padding: 10px 12px; border-radius: 12px; background: rgba(4, 22, 29, .6);
 }
-.join-links .btn .pt { color: #04161d; opacity: .7; }
-.join-links .btn.ghost { background: transparent; color: #79feff; }
-.join-links .btn.ghost .pt { color: #79feff; }
-.join-links .btn:hover { filter: drop-shadow(0 0 12px rgba(121, 254, 255, .45)); }
+.join-steps .num {
+  width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; font-weight: 800;
+  color: #04161d; background: #79feff; box-shadow: 0 0 12px rgba(121, 254, 255, .45);
+}
+.join-steps .txt { font-weight: 700; }
+.join-steps small { display: block; font-size: 13px; font-weight: 400; color: var(--muted); }
+.join-steps .btn {
+  display: block; padding: 8px 14px; border-radius: 999px; font-weight: 700; text-decoration: none; text-align: center;
+  background: #79feff; color: #04161d;
+}
+.join-steps .btn small { color: #04161d; opacity: .7; }
+.join-steps .btn:hover { filter: drop-shadow(0 0 12px rgba(121, 254, 255, .45)); }
+.join-note { margin: 12px 0 0; font-size: 13px; color: var(--muted); }
+@media (max-width: 560px) {
+  .join-steps li { grid-template-columns: 34px 1fr; }
+  .join-steps .btn { grid-column: 1 / -1; }
+}
