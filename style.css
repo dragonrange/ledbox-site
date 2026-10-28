@@ -307,3 +307,22 @@ body.no-scroll { overflow: hidden; }
   .lb-frame img { max-height: calc(100vh - 200px); }
   .lb-frame figcaption { font-size: 13px; padding: 18px 10px 8px; }
 }
+
+/* ---------- Teste fechado: entrar pela web e instalar pelo Play ---------- */
+.join-test {
+  margin: 18px auto 0; max-width: 560px; padding: 16px 18px; border-radius: 16px;
+  border: 1px solid var(--line-soft); background: rgba(9, 32, 43, .5);
+}
+.join-test p { margin: 0 0 8px; }
+.join-title { font-weight: 700; color: #6dff8b; }
+.join-steps { font-size: 14px; color: var(--muted); }
+.join-test .pt { display: inline; margin: 0; font-size: inherit; font-weight: 400; color: var(--muted); }
+.join-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 12px; }
+.join-links .btn {
+  display: inline-block; padding: 10px 18px; border-radius: 999px; font-weight: 700; text-decoration: none;
+  background: #79feff; color: #04161d; border: 2px solid #79feff;
+}
+.join-links .btn .pt { color: #04161d; opacity: .7; }
+.join-links .btn.ghost { background: transparent; color: #79feff; }
+.join-links .btn.ghost .pt { color: #79feff; }
+.join-links .btn:hover { filter: drop-shadow(0 0 12px rgba(121, 254, 255, .45)); }
